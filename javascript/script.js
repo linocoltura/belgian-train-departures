@@ -36,6 +36,7 @@ function update(){
   
   $.get("https://api.irail.be/liveboard/?station="+ getParameterByName('station') +"&lang=nl", function(data){
     xmlData = data;
+    console.log(xmlData);
     $('.dataTable').html(' <tr><th>Departure</th><th>To</th><th>Type</th><th>Platform</th></tr> ');
     fill();
 
@@ -88,6 +89,7 @@ function fill(){
     var station = field.find('station').text()
     var platform = field.find('platform').text()
     var delay = parseInt(field.attr('delay'))/60;
+    var canceled = parseInt(field.attr('canceled'));
     if(parseInt(delay)>0){
       delay = '+'+delay;
     } else delay = "";
@@ -95,9 +97,14 @@ function fill(){
       var second = field.find('vehicle').text().charAt(9);
     } else second = "";
     var type = field.find('vehicle').text().charAt(8) + second;
-    $('.dataTable')
+    if(canceled == 1){
+      $('.dataTable')
+      .append('<tr> <td class="smallData">'+ '<span class="canceled">canceled</span>' + ' </td> <td class="bigData">'+cleanUpSpecialChars(station)+' </td> <td class="smallData">'+type+' </td> <td class="smallData">'+platform+' </td> </tr>');
+    }
+    else{
+      $('.dataTable')
       .append('<tr> <td class="smallData">'+getTimeFromDate(time)+ ' <span class="delay">'+ delay +'</span>' + ' </td> <td class="bigData">'+cleanUpSpecialChars(station)+' </td> <td class="smallData">'+type+' </td> <td class="smallData">'+platform+' </td> </tr>');
-    ;
+    }
   });
 }
 
