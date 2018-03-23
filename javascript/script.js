@@ -99,7 +99,7 @@ function fill(){
     var type = field.find('vehicle').text().charAt(8) + second;
     if(canceled == 1){
       $('.dataTable')
-      .append('<tr> <td class="smallData">'+ '<span class="canceled">canceled</span>' + ' </td> <td class="bigData">'+cleanUpSpecialChars(station)+' </td> <td class="smallData">'+type+' </td> <td class="smallData">'+platform+' </td> </tr>');
+      .append('<tr> <td class="smallData">'+ '<span class="canceled">***</span>' + ' </td> <td class="bigData">'+cleanUpSpecialChars(station)+' </td> <td class="smallData">'+type+' </td> <td class="smallData">'+platform+' </td> </tr>');
     }
     else{
       $('.dataTable')
